@@ -1,0 +1,38 @@
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<body>
+<video src="" id="video" autoplay="true"></video>
+<canvas id="preview"></canvas>
+<div id="logger"></div>
+<script>
+var canvas =document.getElementById("preview");
+var context = canvas.getContext("2d");
+canvas.width=800;
+canvas.height=600;
+context.width = canvas.height;
+context.height=canvas.height;
+
+  var video =document.getElementById('video');
+  var socket =io();
+
+
+  function logger(msg){
+    $("#logger").text(msg);
+  }
+  function loadCam(stream){
+    logger('Camera');
+  }
+  function loadFail(stream){
+    logger('Fail');
+  }
+  function viewVideo(vides,context){
+    context.drawImage(video,0,0,context.width,context.height);
+  }
+  $(function(){
+    navigator.getUserMedia= (navigator.getUserMedia||navigator.webkitGetUserMedia ||
+       navigator.mozGetUserMedia ||navigator.msgGetUserMedia);
+  });
+
+  </script>
+
+</body>
